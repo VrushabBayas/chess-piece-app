@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import MoveDisplay from "../components/MoveDisplay";
+import MoveDisplay from "../MoveDisplay";
+
 import "@testing-library/jest-dom";
 
 describe("MoveDisplay Component", () => {
