@@ -24,21 +24,21 @@
 }
 /* Highlight the selected piece position */
 .highlighted-piece {
-    background-color: yellow !important;
+    background-color: yellow;
     color: black;
     font-weight: bold;
 }
 
 /* Highlight all valid moves */
 .highlighted-move {
-    background-color: lightgreen !important;
+    background-color: lightgreen;
+    font-weight: bold;
 }
-
 
 
 /* Hover Effect */
 .cell:hover {
-    background-color: rgba(255, 255, 0, 0.6); /* Highlighted effect */
+    background-color: lightcyan; /* Highlighted effect */
 }
 
 
