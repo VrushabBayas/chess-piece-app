@@ -6,14 +6,21 @@ import PieceSelector from "./components/PieceSelector";
 
 function App() {
   const [moves, setMoves] = useState([]);
+  const [position, setPosition] = useState("D4");
   const onMoveCalculated = (moves) => {
     setMoves(moves);
   };
+  console.log("position: ", position);
+
   return (
-    <div data-testid="app" className="App">
-      <ChessBoard />
-      <div>
-        <PieceSelector onMoveCalculated={onMoveCalculated} />
+    <div className="container" data-testid="container">
+      <ChessBoard position={position} moves={moves} />
+      <div className="controls">
+        <PieceSelector
+          onMoveCalculated={onMoveCalculated}
+          setPosition={setPosition}
+          position={position}
+        />
         <MoveDisplay moves={moves} />
       </div>
     </div>
