@@ -3,6 +3,6 @@ import App from "./App";
 
 test("renders App", () => {
   render(<App />);
-  const app = screen.getByTestId("app");
+  const app = screen.getByTestId("container");
   expect(app).toBeInTheDocument();
 });
