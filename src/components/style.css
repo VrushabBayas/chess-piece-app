@@ -1,19 +1,107 @@
-.chess-board{
+/* Chessboard Styling */
+.chess-board {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
     width: 400px;
     height: 400px;
-    border: 1px solid black;
+    border: 2px solid black;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
-.cell{
+
+/* Individual Chess Cell Styling */
+.cell {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 18px;
     border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
 }
-.cell:hover{
-    background-color: #f0f0f0;
+/* Highlight the selected piece position */
+.highlighted-piece {
+    background-color: yellow !important;
+    color: black;
+    font-weight: bold;
 }
 
+/* Highlight all valid moves */
+.highlighted-move {
+    background-color: lightgreen !important;
+}
+
+
+
+/* Hover Effect */
+.cell:hover {
+    background-color: rgba(255, 255, 0, 0.6); /* Highlighted effect */
+}
+
+
+
+/* Piece Selector Component */
+.piece-selector-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    width: fit-content;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels & Inputs */
+.piece-selector-component label,
+.piece-selector-component select,
+.piece-selector-component input {
+    font-size: 16px;
+    padding: 5px;
+}
+
+/* Button Styling */
+.piece-selector-component button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.piece-selector-component button:hover {
+    background-color: #0056b3;
+}
+
+/* Move Display Box */
+.move-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    min-width: 60%;
+    height: 100px;  /* Fixed height */
+    padding: 15px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow: auto;  /* Enables scrolling if moves list is too long */
+  }
+  
+  /* Move Text */
+  .moves-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    white-space: nowrap;  /* Keeps moves in a single line */
+  }
