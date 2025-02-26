@@ -31,4 +31,29 @@ describe("ChessBoard Component", () => {
     expect(firstCell).toBeInTheDocument();
     expect(lastCell).toBeInTheDocument();
   });
+
+  test("highlights the selected piece position", () => {
+    render(<ChessBoard position="D4" />);
+    const selectedCell = screen.getByTestId("cell-D4");
+    expect(selectedCell).toHaveClass("highlighted-piece");
+  });
+
+  test("highlights all valid move positions", () => {
+    const moves = ["C4", "E4", "D3", "D5"]; // Example moves for a piece
+    render(<ChessBoard position="D4" moves={moves} />);
+
+    moves.forEach((move) => {
+      const moveCell = screen.getByTestId(`cell-${move}`);
+      expect(moveCell).toHaveClass("highlighted-move");
+    });
+  });
+
+  test("does not highlight unrelated positions", () => {
+    const moves = ["C4", "E4", "D3", "D5"];
+    render(<ChessBoard position="D4" moves={moves} />);
+
+    const unrelatedCell = screen.getByTestId("cell-A1");
+    expect(unrelatedCell).not.toHaveClass("highlighted-move");
+    expect(unrelatedCell).not.toHaveClass("highlighted-piece");
+  });
 });

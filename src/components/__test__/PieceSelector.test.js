@@ -1,7 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import PieceSelector from "../PieceSelector";
-
 import "@testing-library/jest-dom";
 
 describe("PieceSelector Component", () => {
@@ -15,26 +14,33 @@ describe("PieceSelector Component", () => {
     render(<PieceSelector onMoveCalculated={jest.fn()} />);
     const inputElement = screen.getByTestId("position-input");
     expect(inputElement).toBeInTheDocument();
-    expect(inputElement.value).toBe("D4");
+    expect(inputElement).toHaveValue(""); // Default empty value
   });
 
   test("renders the calculate button", () => {
     render(<PieceSelector onMoveCalculated={jest.fn()} />);
     const buttonElement = screen.getByTestId("calculate-btn");
     expect(buttonElement).toBeInTheDocument();
+    expect(buttonElement).toHaveTextContent("Calculate Moves");
   });
 
   test("updates piece selection", () => {
     render(<PieceSelector onMoveCalculated={jest.fn()} />);
     const selectElement = screen.getByTestId("piece-selector");
 
-    fireEvent.change(selectElement, { target: { value: "King" } });
+    fireEvent.change(selectElement, { target: { value: "Queen" } });
 
-    expect(selectElement.value).toBe("King");
+    expect(selectElement.value).toBe("Queen");
   });
 
-  test("updates position input", () => {
-    render(<PieceSelector onMoveCalculated={jest.fn()} />);
+  test("updates position input field when user types", () => {
+    render(
+      <PieceSelector
+        onMoveCalculated={jest.fn()}
+        position="E5"
+        setPosition={jest.fn()}
+      />
+    );
     const inputElement = screen.getByTestId("position-input");
 
     fireEvent.change(inputElement, { target: { value: "E5" } });
@@ -44,11 +50,33 @@ describe("PieceSelector Component", () => {
 
   test("triggers move calculation on button click", () => {
     const mockOnMoveCalculated = jest.fn();
-    render(<PieceSelector onMoveCalculated={mockOnMoveCalculated} />);
+    render(
+      <PieceSelector
+        onMoveCalculated={mockOnMoveCalculated}
+        position="E5"
+        setPosition={jest.fn()}
+      />
+    );
 
     const buttonElement = screen.getByTestId("calculate-btn");
     fireEvent.click(buttonElement);
 
     expect(mockOnMoveCalculated).toHaveBeenCalled();
+  });
+
+  test("does not call onMoveCalculated if position input is empty", () => {
+    const mockOnMoveCalculated = jest.fn();
+    render(
+      <PieceSelector
+        onMoveCalculated={mockOnMoveCalculated}
+        position=""
+        setPosition={jest.fn()}
+      />
+    );
+
+    const buttonElement = screen.getByTestId("calculate-btn");
+    fireEvent.click(buttonElement);
+
+    expect(mockOnMoveCalculated).not.toHaveBeenCalled();
   });
 });
