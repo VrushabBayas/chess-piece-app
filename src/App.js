@@ -1,10 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
+import ChessBoard from "./components/ChessBoard";
 
 function App() {
   return (
     <div data-testid="app" className="App">
-      Coming soon...
+      <ChessBoard />
     </div>
   );
 }
