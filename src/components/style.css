@@ -105,3 +105,8 @@
     text-align: center;
     white-space: nowrap;  /* Keeps moves in a single line */
   }
+  .error-msg{
+    color: red;
+    font-size: 16px;
+    margin-top: 0.2rem;
+  }

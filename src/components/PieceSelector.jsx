@@ -6,6 +6,7 @@ import Pawn from "../models/Pawn";
 const PieceSelector = ({ onMoveCalculated, setPosition, position }) => {
   // State for selected chess piece and board position
   const [piece, setPiece] = React.useState("King");
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   // Handles dropdown selection change for chess piece
   const handlePieceChange = (event) => {
@@ -19,7 +20,19 @@ const PieceSelector = ({ onMoveCalculated, setPosition, position }) => {
 
   // Calculates possible moves based on the selected piece and position
   const calculateMoves = () => {
-    if (!position) return; // Ensure position is provided
+    if (!position) {
+      setErrorMessage("Please select position");
+      return;
+    } // Ensure position is provided
+    const isValidPosition = /^[A-H][1-8]$/i.test(position);
+    if (!isValidPosition) {
+      setErrorMessage(
+        "Invalid position. Please enter a valid position (e.g., A1)"
+      );
+      setPosition("");
+      return;
+    } // Validate position format
+
     // Mapping of piece names to their respective classes
     const pieceClasses = {
       King: King,
@@ -38,6 +51,9 @@ const PieceSelector = ({ onMoveCalculated, setPosition, position }) => {
 
     // Call parent handler with calculated moves
     onMoveCalculated(moves);
+    if (errorMessage) {
+      setErrorMessage("");
+    }
   };
 
   return (
@@ -67,7 +83,7 @@ const PieceSelector = ({ onMoveCalculated, setPosition, position }) => {
         value={position}
         onChange={handlePositionChange}
       />
-
+      {errorMessage && <span className="error-msg">{errorMessage}</span>}
       <br />
       <br />
 
