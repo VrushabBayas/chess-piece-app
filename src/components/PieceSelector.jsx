@@ -3,10 +3,9 @@ import King from "../models/King";
 import Queen from "../models/Queen";
 import Pawn from "../models/Pawn";
 
-const PieceSelector = ({ onMoveCalculated }) => {
+const PieceSelector = ({ onMoveCalculated, setPosition, position }) => {
   // State for selected chess piece and board position
   const [piece, setPiece] = React.useState("King");
-  const [position, setPosition] = React.useState("D4");
 
   // Handles dropdown selection change for chess piece
   const handlePieceChange = (event) => {
@@ -20,6 +19,7 @@ const PieceSelector = ({ onMoveCalculated }) => {
 
   // Calculates possible moves based on the selected piece and position
   const calculateMoves = () => {
+    if (!position) return; // Ensure position is provided
     // Mapping of piece names to their respective classes
     const pieceClasses = {
       King: King,
