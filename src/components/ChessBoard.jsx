@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-export default function ChessBoard() {
+const ChessBoard = () => {
   const columns = ["A", "B", "C", "D", "E", "F", "G", "H"];
   const rows = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -16,4 +16,5 @@ export default function ChessBoard() {
       )}
     </div>
   );
-}
+};
+export default ChessBoard;
