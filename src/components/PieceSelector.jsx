@@ -1,17 +1,48 @@
 import React from "react";
+import King from "../models/King";
+import Queen from "../models/Queen";
+import Pawn from "../models/Pawn";
 
 const PieceSelector = ({ onMoveCalculated }) => {
+  // State for selected chess piece and board position
   const [piece, setPiece] = React.useState("King");
   const [position, setPosition] = React.useState("D4");
+
+  // Handles dropdown selection change for chess piece
   const handlePieceChange = (event) => {
     setPiece(event.target.value);
   };
 
+  // Handles position input change
   const handlePositionChange = (event) => {
-    setPosition(event.target.value);
+    setPosition(event.target.value.toUpperCase()); // Ensure uppercase for consistency
   };
+
+  // Calculates possible moves based on the selected piece and position
+  const calculateMoves = () => {
+    // Mapping of piece names to their respective classes
+    const pieceClasses = {
+      King: King,
+      Queen: Queen,
+      Pawn: Pawn, // Default piece
+    };
+
+    // Get the appropriate piece class or default to Pawn
+    const PieceClass = pieceClasses[piece] || Pawn;
+
+    // Instantiate the piece with the given position
+    const pieceInstance = new PieceClass(position);
+
+    // Retrieve possible moves from the piece instance
+    const moves = pieceInstance.getPossibleMoves();
+
+    // Call parent handler with calculated moves
+    onMoveCalculated(moves);
+  };
+
   return (
     <div className="piece-selector-component">
+      {/* Dropdown for selecting a chess piece */}
       <label htmlFor="piece-selector">Select a piece:</label>
       <select
         id="piece-selector"
@@ -23,8 +54,11 @@ const PieceSelector = ({ onMoveCalculated }) => {
         <option value="King">King</option>
         <option value="Queen">Queen</option>
       </select>
+
       <br />
       <br />
+
+      {/* Input field for entering board position */}
       <label htmlFor="position-input">Enter position:</label>
       <input
         id="position-input"
@@ -33,10 +67,13 @@ const PieceSelector = ({ onMoveCalculated }) => {
         value={position}
         onChange={handlePositionChange}
       />
+
       <br />
       <br />
-      <button data-testid="calculate-btn" onClick={onMoveCalculated}>
-        Calculate
+
+      {/* Button to trigger move calculation */}
+      <button data-testid="calculate-btn" onClick={calculateMoves}>
+        Calculate Moves
       </button>
       <br />
       <br />
