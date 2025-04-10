@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="container" data-testid="container">
       <ChessBoard position={position} moves={moves} />
-      <div className="controls">
+      <div className="controls-class">
         <PieceSelector
           onMoveCalculated={onMoveCalculated}
           setPosition={setPosition}
@@ -25,7 +25,7 @@ function App() {
         <MoveDisplay moves={moves} />
       </div>
 
-      {/*<AuthorList />*/}
+      <AuthorList />
     </div>
   );
 }
