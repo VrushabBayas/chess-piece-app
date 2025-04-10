@@ -3,6 +3,7 @@ import "./App.css";
 import ChessBoard from "./components/ChessBoard";
 import MoveDisplay from "./components/MoveDisplay";
 import PieceSelector from "./components/PieceSelector";
+import AuthorList from "./components/Author";
 
 function App() {
   const [moves, setMoves] = useState([]);
@@ -23,6 +24,8 @@ function App() {
         />
         <MoveDisplay moves={moves} />
       </div>
+
+      {/*<AuthorList />*/}
     </div>
   );
 }
