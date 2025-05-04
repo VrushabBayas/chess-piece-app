@@ -11,7 +11,6 @@ function App() {
   const onMoveCalculated = (moves) => {
     setMoves(moves);
   };
-  console.log("position: ", position);
 
   return (
     <div className="container" data-testid="container">
